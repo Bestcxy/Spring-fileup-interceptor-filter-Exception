@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:util="http://www.springframework.org/schema/util"  
+    xmlns:orm="http://www.springframework.org/schema/orm"   
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd  
+                        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd  
+                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd  
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd  
+                        http://www.springframework.org/schema/orm http://www.springframework.org/schema/orm/spring-orm-4.3.xsd  
+                        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd  
+    ">
+   <!-- 方式一 -->
+   <!-- 全局异常捕获 -->
+    <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	     定义默认的异常处理页面
+	    <property name="defaultErrorView" value="error"/>
+	    定义异常处理页面用来获取异常信息的变量名，也可不定义，默认名为exception 
+    	<property name="exceptionAttribute" value="ex"/>
+    	设置日志输出级别，不定义则默认不输出警告等错误日志信息     
+        <property name="warnLogCategory" value="WARN"></property> 
+        默认HTTP状态码     
+        <property name="defaultStatusCode" value="200"></property>     
+         
+    	对于需要特殊处理的异常
+    	<property name="exceptionMappings">     
+             <props>     
+                 <prop key="java.lang.Exception">error</prop>     
+                 <prop key="java.lang.Error">error</prop>
+             </props>     
+         </property>     
+         <property name="statusCodes">     
+             <props>     
+                 <prop key="error">500</prop>/views/error.jsp
+             </props>     
+         </property>
+	</bean> -->
+    
+    <!-- 方式二 -->
+	<!-- Exception 类捕获 -->
+   <!-- <context:component-scan base-package="com.bestcxx.stu.fileup.exception.ExceptionResolver"/>  -->
+    
+    <!-- 方式三 -->
+    <!-- 全局异常处理器只要你实现了HandlerExceptionResolver接口，这个类就是一个全局异常处理器-->  
+    <bean class="com.bestcxx.stu.fileup.exception.GlobalExceptionResolver"></bean>
+    
+</beans>

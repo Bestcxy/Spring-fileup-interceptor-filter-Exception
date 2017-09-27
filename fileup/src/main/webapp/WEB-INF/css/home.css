@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+.col_msgspan{
+	color:white;
+	background-color:red;
+	width:100px;
+	height:10px;
+}
