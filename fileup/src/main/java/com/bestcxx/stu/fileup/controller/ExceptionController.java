@@ -1,11 +1,13 @@
 package com.bestcxx.stu.fileup.controller;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bestcxx.stu.fileup.exception.MyException;
@@ -19,15 +21,48 @@ import com.bestcxx.stu.fileup.exception.MyException;
  */
 @Controller
 public class ExceptionController {
-	//捕获本来的异常
-	//优先级比全局异常高
-	@ExceptionHandler(Exception.class)
-	public ModelAndView handleException(Exception ex, WebRequest request) {
+	
+
+	/**
+	 * 捕获本类的异常
+	 * 优先级比全局异常高
+	 * 针对接口调动的异常处理
+	 * 一个类仅允许存在一个 @ExceptionHandler 标注的方法
+	 * @param ex
+	 * @param request
+	 * @return
+	 */
+	/*@ExceptionHandler(Exception.class)
+	@ResponseBody
+	public Object handleRestfulException(Exception ex, WebRequest request) {
 		request.setAttribute("msg","异常捕获:"+this.getClass()+" "+ex.getMessage(), RequestAttributes.SCOPE_REQUEST);
 		ModelAndView mav = new ModelAndView("error");
 		mav.addObject("ex", ex);
-		return mav;
+		HashMap map=new HashMap();
+		map.put("msg", "非 ModelAndView 的实体或者字符串");
+		return map;
+	}*/
+	
+
+	/**
+	 * 捕获本类的异常
+	 * 优先级比全局异常高
+	 * 针对页面请求的异常处理，默认返回error.jsp
+	 * 一个类仅允许存在一个 @ExceptionHandler 标注的方法
+	 * @param ex
+	 * @param request
+	 * @return
+	 */
+	@ExceptionHandler(Exception.class)
+	public ModelAndView handlePageException(Exception ex, WebRequest request) {
+	request.setAttribute("msg","异常捕获:"+this.getClass()+" "+ex.getMessage(), RequestAttributes.SCOPE_REQUEST);
+	ModelAndView mav = new ModelAndView("error");
+	mav.addObject("ex", ex);
+	return mav;
 	}
+	
+	
+	
  
 
 	/**
